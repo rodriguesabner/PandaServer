@@ -1,11 +1,15 @@
 package com.kingaspx.menu;
 
 import com.kingaspx.util.RoundFrame;
+import static com.kingaspx.util.UtilClass.FILENAME_BAT;
+import static com.kingaspx.util.UtilClass.USERPROFILE_PATH;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class Settings extends javax.swing.JDialog {
@@ -15,7 +19,10 @@ public class Settings extends javax.swing.JDialog {
         initComponents();
         new RoundFrame().corner(this, getWidth(), getHeight(), 10, 10);
         read_botfile();
-        read_fwfile();
+        fw_lbl.setText(read_fwfile());
+        fw_txt.setText(read_fwfile());
+        filename_bat_lbl.setText(FILENAME_BAT + ".bat");
+        authtoken_txt.setText(read_authToken());
     }
 
     @SuppressWarnings("unchecked")
@@ -23,7 +30,7 @@ public class Settings extends javax.swing.JDialog {
     private void initComponents() {
 
         kGradientPanel2 = new keeptoo.KGradientPanel();
-        jLabel4 = new javax.swing.JLabel();
+        filename_bat_lbl = new javax.swing.JLabel();
         server_btn = new keeptoo.KButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -34,10 +41,14 @@ public class Settings extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         close_btn = new keeptoo.KButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        fw_lbl = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         kGradientPanel3 = new keeptoo.KGradientPanel();
         fw_txt = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        kGradientPanel4 = new keeptoo.KGradientPanel();
+        authtoken_txt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -60,11 +71,10 @@ public class Settings extends javax.swing.JDialog {
         });
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setText("bot.bat");
-        kGradientPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 70, 130, 20));
+        filename_bat_lbl.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        filename_bat_lbl.setForeground(new java.awt.Color(72, 72, 72));
+        filename_bat_lbl.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        kGradientPanel2.add(filename_bat_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 70, 170, 20));
 
         server_btn.setText("Save");
         server_btn.setkAllowGradient(false);
@@ -73,12 +83,13 @@ public class Settings extends javax.swing.JDialog {
         server_btn.setkHoverColor(new java.awt.Color(77, 153, 116));
         server_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         server_btn.setkPressedColor(new java.awt.Color(63, 123, 94));
+        server_btn.setOpaque(false);
         server_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 server_btnActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(server_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 130, 30));
+        kGradientPanel2.add(server_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 130, 30));
         server_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jSeparator2.setForeground(new java.awt.Color(234, 234, 234));
@@ -91,8 +102,8 @@ public class Settings extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Montserrat Light", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(12, 29, 46));
-        jLabel1.setText("Server");
-        kGradientPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 60, 30));
+        jLabel1.setText("Control");
+        kGradientPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(72, 72, 72));
@@ -114,21 +125,22 @@ public class Settings extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Montserrat Medium", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(12, 29, 46));
         jLabel3.setText("Panda");
-        kGradientPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, 30));
+        kGradientPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, 30));
 
         close_btn.setText("Close");
         close_btn.setkAllowGradient(false);
         close_btn.setkAllowTab(false);
-        close_btn.setkBackGroundColor(new java.awt.Color(197, 46, 63));
+        close_btn.setkBackGroundColor(new java.awt.Color(179, 94, 94));
         close_btn.setkHoverColor(new java.awt.Color(194, 51, 66));
         close_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         close_btn.setkPressedColor(new java.awt.Color(153, 58, 68));
+        close_btn.setOpaque(false);
         close_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close_btnActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 80, 30));
+        kGradientPanel2.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 80, 30));
         close_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel6.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
@@ -136,10 +148,10 @@ public class Settings extends javax.swing.JDialog {
         jLabel6.setText("Forwading");
         kGradientPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
 
-        jLabel7.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        kGradientPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, 20));
+        fw_lbl.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        fw_lbl.setForeground(new java.awt.Color(72, 72, 72));
+        fw_lbl.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        kGradientPanel2.add(fw_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, 20));
 
         jSeparator3.setForeground(new java.awt.Color(234, 234, 234));
         kGradientPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 400, 10));
@@ -156,15 +168,36 @@ public class Settings extends javax.swing.JDialog {
 
         kGradientPanel2.add(kGradientPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 420, 30));
 
-        getContentPane().add(kGradientPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 280));
+        jLabel7.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel7.setText("Auth Token");
+        kGradientPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, 20));
 
-        setSize(new java.awt.Dimension(440, 280));
+        jSeparator4.setForeground(new java.awt.Color(234, 234, 234));
+        kGradientPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 400, 10));
+
+        kGradientPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        kGradientPanel4.setkEndColor(new java.awt.Color(103, 204, 161));
+        kGradientPanel4.setkFillBackground(false);
+        kGradientPanel4.setkStartColor(new java.awt.Color(51, 131, 97));
+        kGradientPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        authtoken_txt.setBorder(null);
+        authtoken_txt.setOpaque(false);
+        kGradientPanel4.add(authtoken_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 400, 30));
+
+        kGradientPanel2.add(kGradientPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 420, 30));
+
+        getContentPane().add(kGradientPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 350));
+
+        setSize(new java.awt.Dimension(440, 350));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void server_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_server_btnActionPerformed
         save_botfile();
         save_fwfile();
+        save_authtoken();
         JOptionPane.showMessageDialog(null, "File Saved");
         dispose();
     }//GEN-LAST:event_server_btnActionPerformed
@@ -222,28 +255,31 @@ public class Settings extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField authtoken_txt;
     private javax.swing.JTextField bot_txt;
     private keeptoo.KButton close_btn;
+    private javax.swing.JLabel filename_bat_lbl;
+    private javax.swing.JLabel fw_lbl;
     private javax.swing.JTextField fw_txt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
+    private keeptoo.KGradientPanel kGradientPanel4;
     private keeptoo.KButton server_btn;
     // End of variables declaration//GEN-END:variables
 
     private void read_botfile() {
-        String filename = "bot.bat";
         try {
-            FileReader arq = new FileReader(filename);
+            FileReader arq = new FileReader(USERPROFILE_PATH + "/" + "/pandacontrol/bin/" + FILENAME_BAT + ".bat");
             BufferedReader readArq = new BufferedReader(arq);
             String line = readArq.readLine();
             bot_txt.setText(line);
@@ -252,23 +288,10 @@ public class Settings extends javax.swing.JDialog {
         }
     }
 
-    private void read_fwfile() {
-        String filename = "forwading.panda";
-        try {
-            FileReader arq = new FileReader(filename);
-            BufferedReader readArq = new BufferedReader(arq);
-            String line = readArq.readLine();
-            fw_txt.setText(line);
-            jLabel7.setText(line);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void save_botfile() {
         FileWriter arq = null;
         try {
-            arq = new FileWriter(new File("bot.bat"));
+            arq = new FileWriter(new File(USERPROFILE_PATH + "/" + "/pandacontrol/bin/" + FILENAME_BAT + ".bat"));
             PrintWriter writeArq = new PrintWriter(arq);
             writeArq.printf(bot_txt.getText());
             arq.close();
@@ -283,12 +306,66 @@ public class Settings extends javax.swing.JDialog {
         }
     }
 
+    private static String read_fwfile() {
+        String forwading = null;
+        String filename = USERPROFILE_PATH + "/pandacontrol/bin/forwading.panda";
+        try {
+            FileReader arq = new FileReader(filename);
+            BufferedReader readArq = new BufferedReader(arq);
+            String line = readArq.readLine();
+            forwading = line;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return forwading;
+    }
+
     private void save_fwfile() {
         FileWriter arq = null;
         try {
-            arq = new FileWriter(new File("forwading.panda"));
+            arq = new FileWriter(new File(USERPROFILE_PATH + "/pandacontrol/bin/forwading.panda"));
             PrintWriter writeArq = new PrintWriter(arq);
             writeArq.printf(fw_txt.getText());
+            arq.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                arq.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static String read_authToken() {
+        String token_resposta = null;
+        String filename = USERPROFILE_PATH + "/.ngrok2/ngrok.yml";
+
+        try {
+            FileReader arq = new FileReader(filename);
+            BufferedReader readArq = new BufferedReader(arq);
+            String line = readArq.readLine();
+
+            Pattern p = Pattern.compile("\\s(.*)");
+            Matcher response = p.matcher(line);
+
+            if (response.find()) {
+                token_resposta = response.group(0);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return token_resposta.replace(" ", "");
+    }
+
+    private void save_authtoken() {
+        FileWriter arq = null;
+        try {
+            arq = new FileWriter(new File(USERPROFILE_PATH + "/.ngrok2/ngrok.yml"));
+            PrintWriter writeArq = new PrintWriter(arq);
+            writeArq.printf("authtoken: " + authtoken_txt.getText());
             arq.close();
         } catch (Exception e) {
             e.printStackTrace();

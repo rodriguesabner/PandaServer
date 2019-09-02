@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 public class TrayIconPanda {
@@ -31,6 +32,7 @@ public class TrayIconPanda {
         }
         
         Dashboard dash = new Dashboard();
+        Locale.setDefault(new Locale("en", "US"));
         new SplashScreen().setVisible(true);
 
         if (!SystemTray.isSupported()) {

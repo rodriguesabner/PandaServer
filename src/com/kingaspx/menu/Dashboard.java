@@ -3,14 +3,21 @@ package com.kingaspx.menu;
 import com.kingaspx.util.NGrokDAO;
 import com.kingaspx.util.NGrokModel;
 import com.kingaspx.util.RoundFrame;
+import static com.kingaspx.util.UtilClass.ARCH;
+import static com.kingaspx.util.UtilClass.OS;
+import static com.kingaspx.util.UtilClass.PROCESSORS;
+import static com.kingaspx.util.UtilClass.PROCESS_NAME;
+import static com.kingaspx.util.UtilClass.USERPROFILE_PATH;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Timer;
@@ -24,7 +31,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     public Dashboard() {
         initComponents();
-
+        setBackground(new Color(0, 0, 0, 0));
         setIcon();
         new RoundFrame().corner(this, getWidth(), getHeight(), 10, 10);
 
@@ -43,62 +50,117 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kGradientPanel2 = new keeptoo.KGradientPanel();
-        jLabel1 = new javax.swing.JLabel();
+        kGradientPanel3 = new keeptoo.KGradientPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
         prot_txt = new javax.swing.JLabel();
+        fw_txt = new javax.swing.JLabel();
+        ip_txt = new javax.swing.JButton();
+        server_btn = new keeptoo.KButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         panel_status = new javax.swing.JPanel();
         status_icon = new keeptoo.KButton();
         status_txt = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        server_btn = new keeptoo.KButton();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        os_txt = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        ip_txt = new javax.swing.JButton();
-        close_btn = new keeptoo.KButton();
+        jLabel6 = new javax.swing.JLabel();
+        arch_txt = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel11 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        core_txt = new javax.swing.JLabel();
         settings_btn1 = new keeptoo.KButton();
-        jLabel2 = new javax.swing.JLabel();
+        close_btn = new keeptoo.KButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        kGradientPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel2.setkFillBackground(false);
-        kGradientPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                kGradientPanel2MouseDragged(evt);
-            }
-        });
-        kGradientPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                kGradientPanel2MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                kGradientPanel2MouseReleased(evt);
-            }
-        });
-        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        kGradientPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        kGradientPanel3.setkFillBackground(false);
+        kGradientPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Montserrat Light", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(12, 29, 46));
-        jLabel1.setText("Server");
-        kGradientPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 70, 30));
+        jLabel5.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel5.setText("IP Address");
+        kGradientPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 20));
+
+        jSeparator3.setForeground(new java.awt.Color(234, 234, 234));
+        kGradientPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 300, 10));
 
         jLabel3.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(72, 72, 72));
         jLabel3.setText("Protocol");
-        kGradientPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 20));
+        kGradientPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 70, 20));
 
-        jLabel4.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel4.setText("IP Address");
-        kGradientPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
+        jLabel9.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel9.setText("Forwading");
+        kGradientPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 100, 20));
+
+        jSeparator5.setForeground(new java.awt.Color(234, 234, 234));
+        kGradientPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 300, 10));
+
+        jSeparator1.setForeground(new java.awt.Color(234, 234, 234));
+        kGradientPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 300, 10));
 
         prot_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         prot_txt.setForeground(new java.awt.Color(23, 23, 23));
         prot_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        kGradientPanel2.add(prot_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 150, 20));
+        kGradientPanel3.add(prot_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 140, 20));
+
+        fw_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        fw_txt.setForeground(new java.awt.Color(23, 23, 23));
+        fw_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        kGradientPanel3.add(fw_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 140, 20));
+
+        ip_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        ip_txt.setForeground(new java.awt.Color(23, 23, 23));
+        ip_txt.setContentAreaFilled(false);
+        ip_txt.setFocusPainted(false);
+        ip_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        ip_txt.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        ip_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ip_txtActionPerformed(evt);
+            }
+        });
+        kGradientPanel3.add(ip_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 210, 20));
+
+        server_btn.setText("Start Server");
+        server_btn.setkAllowGradient(false);
+        server_btn.setkAllowTab(false);
+        server_btn.setkBackGroundColor(new java.awt.Color(94, 179, 138));
+        server_btn.setkHoverColor(new java.awt.Color(77, 153, 116));
+        server_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        server_btn.setkPressedColor(new java.awt.Color(63, 123, 94));
+        server_btn.setOpaque(false);
+        server_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                server_btnActionPerformed(evt);
+            }
+        });
+        kGradientPanel3.add(server_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 280, 30));
+        server_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel2.setFont(new java.awt.Font("Montserrat Medium", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel2.setText("Panda");
+        kGradientPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+
+        jLabel1.setFont(new java.awt.Font("Montserrat Light", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel1.setText("Control");
+        kGradientPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 70, 30));
 
         panel_status.setBackground(new java.awt.Color(254, 220, 224));
         panel_status.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,57 +180,64 @@ public class Dashboard extends javax.swing.JFrame {
         status_txt.setText("Inactive");
         panel_status.add(status_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 30));
 
-        kGradientPanel2.add(panel_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 90, 30));
+        kGradientPanel3.add(panel_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 90, -1));
 
-        jSeparator1.setForeground(new java.awt.Color(234, 234, 234));
-        kGradientPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 310, 10));
+        getContentPane().add(kGradientPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 320, 230));
 
-        server_btn.setText("Start Server");
-        server_btn.setkAllowGradient(false);
-        server_btn.setkAllowTab(false);
-        server_btn.setkBackGroundColor(new java.awt.Color(94, 179, 138));
-        server_btn.setkHoverColor(new java.awt.Color(77, 153, 116));
-        server_btn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        server_btn.setkPressedColor(new java.awt.Color(63, 123, 94));
-        server_btn.setOpaque(false);
-        server_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                server_btnActionPerformed(evt);
-            }
-        });
-        kGradientPanel2.add(server_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 310, 30));
-        server_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        kGradientPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        kGradientPanel1.setkEndColor(new java.awt.Color(108, 108, 108));
+        kGradientPanel1.setkFillBackground(false);
+        kGradientPanel1.setkStartColor(new java.awt.Color(81, 81, 81));
+        kGradientPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Montserrat Light", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel7.setText("Specifications");
+        kGradientPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 150, 30));
+
+        jLabel8.setFont(new java.awt.Font("Montserrat Medium", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel8.setText("OS");
+        kGradientPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+
+        jLabel4.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel4.setText("OS");
+        kGradientPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 20));
+
+        os_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        os_txt.setForeground(new java.awt.Color(23, 23, 23));
+        os_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        kGradientPanel1.add(os_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 140, 20));
 
         jSeparator2.setForeground(new java.awt.Color(234, 234, 234));
-        kGradientPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, 10));
+        kGradientPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 300, 10));
 
-        ip_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        ip_txt.setForeground(new java.awt.Color(23, 23, 23));
-        ip_txt.setContentAreaFilled(false);
-        ip_txt.setFocusPainted(false);
-        ip_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        ip_txt.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        ip_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ip_txtActionPerformed(evt);
-            }
-        });
-        kGradientPanel2.add(ip_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 69, 220, 20));
+        jLabel6.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel6.setText("Architeture");
+        kGradientPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
 
-        close_btn.setToolTipText("Close");
-        close_btn.setkAllowGradient(false);
-        close_btn.setkAllowTab(false);
-        close_btn.setkBackGroundColor(new java.awt.Color(226, 34, 55));
-        close_btn.setkHoverColor(new java.awt.Color(226, 34, 55));
-        close_btn.setkPressedColor(new java.awt.Color(226, 34, 55));
-        close_btn.setOpaque(false);
-        close_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                close_btnActionPerformed(evt);
-            }
-        });
-        kGradientPanel2.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 30, 10));
-        close_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        arch_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        arch_txt.setForeground(new java.awt.Color(23, 23, 23));
+        arch_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        kGradientPanel1.add(arch_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 140, 20));
+
+        jSeparator4.setForeground(new java.awt.Color(234, 234, 234));
+        kGradientPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 300, 10));
+
+        jLabel11.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel11.setText("CPU");
+        kGradientPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 20));
+
+        jSeparator7.setForeground(new java.awt.Color(234, 234, 234));
+        kGradientPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 300, 10));
+
+        core_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        core_txt.setForeground(new java.awt.Color(23, 23, 23));
+        core_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        kGradientPanel1.add(core_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 140, 20));
 
         settings_btn1.setToolTipText("Settings");
         settings_btn1.setkAllowGradient(false);
@@ -182,49 +251,48 @@ public class Dashboard extends javax.swing.JFrame {
                 settings_btn1ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(settings_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 30, 10));
+        kGradientPanel1.add(settings_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 10, 10));
         settings_btn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel2.setFont(new java.awt.Font("Montserrat Medium", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(12, 29, 46));
-        jLabel2.setText("Panda");
-        kGradientPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 30));
+        close_btn.setToolTipText("Close");
+        close_btn.setkAllowGradient(false);
+        close_btn.setkAllowTab(false);
+        close_btn.setkBackGroundColor(new java.awt.Color(226, 34, 55));
+        close_btn.setkHoverColor(new java.awt.Color(226, 34, 55));
+        close_btn.setkPressedColor(new java.awt.Color(226, 34, 55));
+        close_btn.setOpaque(false);
+        close_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                close_btnActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 10, 10));
+        close_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        getContentPane().add(kGradientPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 220));
+        getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 180));
 
-        setBounds(0, 0, 350, 220);
+        setBounds(0, 0, 339, 429);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void kGradientPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel2MousePressed
-        setOpacity((float) 0.8);
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }//GEN-LAST:event_kGradientPanel2MousePressed
-
-    private void kGradientPanel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel2MouseReleased
-        setOpacity((float) 1.0);
-    }//GEN-LAST:event_kGradientPanel2MouseReleased
-
-    private void kGradientPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel2MouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-
-        this.setLocation(x - xMouse, y - yMouse);
-    }//GEN-LAST:event_kGradientPanel2MouseDragged
 
     boolean server_status = false;
 
     private void server_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_server_btnActionPerformed
         try {
             if (server_status == false) {
-                Runtime.getRuntime().exec("cmd /c start /B bot.bat");
+                if (OS.equals("x86")) {
+                    Runtime.getRuntime().exec("cmd /c start /B start_x86.bat");
+                } else {
+                    Process p = Runtime.getRuntime().exec("cmd /c start /B start_64.bat");
+                    System.out.println(p.getErrorStream().read());
+                }
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    Runtime.getRuntime().exec("taskkill /F /IM ngrok.exe");
+                    Runtime.getRuntime().exec("taskkill /F /IM " + PROCESS_NAME + ".exe");
                 } else {
                 }
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_server_btnActionPerformed
 
@@ -278,15 +346,30 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel arch_txt;
     private keeptoo.KButton close_btn;
+    private javax.swing.JLabel core_txt;
+    private javax.swing.JLabel fw_txt;
     private javax.swing.JButton ip_txt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private keeptoo.KGradientPanel kGradientPanel2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator7;
+    private keeptoo.KGradientPanel kGradientPanel1;
+    private keeptoo.KGradientPanel kGradientPanel3;
+    private javax.swing.JLabel os_txt;
     private javax.swing.JPanel panel_status;
     private javax.swing.JLabel prot_txt;
     private keeptoo.KButton server_btn;
@@ -303,6 +386,7 @@ public class Dashboard extends javax.swing.JFrame {
             @Override
             public void run() {
                 get_data();
+                set_data();
             }
         }, delay, interval);
     }
@@ -356,9 +440,16 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }
 
-    private String read_fwfile() {
+    private void set_data() {
+        os_txt.setText(OS);
+        arch_txt.setText(ARCH);
+        fw_txt.setText(read_fwfile());
+        core_txt.setText(String.valueOf(PROCESSORS));
+    }
+
+    private static String read_fwfile() {
         String forwading = null;
-        String filename = "forwading.panda";
+        String filename = USERPROFILE_PATH + "/pandacontrol/bin/forwading.panda";
         try {
             FileReader arq = new FileReader(filename);
             BufferedReader readArq = new BufferedReader(arq);
