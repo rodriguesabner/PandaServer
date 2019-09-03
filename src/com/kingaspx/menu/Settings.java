@@ -146,7 +146,7 @@ public class Settings extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(72, 72, 72));
-        jLabel6.setText("Forwading");
+        jLabel6.setText("Forwarding");
         kGradientPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
 
         fw_lbl.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N

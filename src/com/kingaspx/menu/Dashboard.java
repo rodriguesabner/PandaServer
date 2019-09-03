@@ -120,7 +120,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(78, 78, 78));
-        jLabel9.setText("Forwading");
+        jLabel9.setText("Forwarding");
         kGradientPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 100, 20));
 
         jSeparator5.setForeground(new java.awt.Color(234, 234, 234));
