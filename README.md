@@ -45,6 +45,8 @@ _Coming soon_
     * FIX: Multiple Dashboard Instances
 * 0.1.0
     * ADD: Settings Windows
+    
+    ![image](https://user-images.githubusercontent.com/40338524/64139383-0d851900-cdd7-11e9-994e-42041720bb06.png)
     * CHANGE: Rename `PandaServer` to `PandaControl`
 * 0.0.1
     * Work in progress
