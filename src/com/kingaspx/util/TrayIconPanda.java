@@ -31,9 +31,9 @@ public class TrayIconPanda {
             java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        Dashboard dash = new Dashboard();
         Locale.setDefault(new Locale("en", "US"));
         new SplashScreen().setVisible(true);
+        Dashboard dash = new Dashboard();
 
         if (!SystemTray.isSupported()) {
             System.out.println("System tray is not supported!");
@@ -44,7 +44,7 @@ public class TrayIconPanda {
         URL url = System.class.getResource("/com/kingaspx/icons/small_logo.png");
         Image img = Toolkit.getDefaultToolkit().getImage(url);
         PopupMenu trayPopupMenu = new PopupMenu();
-        TrayIcon trayIcon = new TrayIcon(img, "PandaServer", trayPopupMenu);
+        TrayIcon trayIcon = new TrayIcon(img, "PandaControl", trayPopupMenu);
 
         MouseListener mouseListener = new MouseListener() {
             @Override
@@ -104,7 +104,7 @@ public class TrayIconPanda {
             }
         });
 
-        MenuItem exit = new MenuItem("Exit PandaServer");
+        MenuItem exit = new MenuItem("Exit PandaControl");
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

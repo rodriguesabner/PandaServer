@@ -2,6 +2,7 @@ package com.kingaspx.menu;
 
 import com.kingaspx.util.RoundFrame;
 import static com.kingaspx.util.UtilClass.FILENAME_BAT;
+import static com.kingaspx.util.UtilClass.PANDAPATH;
 import static com.kingaspx.util.UtilClass.USERPROFILE_PATH;
 import java.io.BufferedReader;
 import java.io.File;
@@ -279,7 +280,7 @@ public class Settings extends javax.swing.JDialog {
 
     private void read_botfile() {
         try {
-            FileReader arq = new FileReader(USERPROFILE_PATH + "/" + "/pandacontrol/bin/" + FILENAME_BAT + ".bat");
+            FileReader arq = new FileReader(PANDAPATH + "/" + FILENAME_BAT + ".bat");
             BufferedReader readArq = new BufferedReader(arq);
             String line = readArq.readLine();
             bot_txt.setText(line);
@@ -291,7 +292,7 @@ public class Settings extends javax.swing.JDialog {
     private void save_botfile() {
         FileWriter arq = null;
         try {
-            arq = new FileWriter(new File(USERPROFILE_PATH + "/" + "/pandacontrol/bin/" + FILENAME_BAT + ".bat"));
+            arq = new FileWriter(new File(PANDAPATH + "/" + FILENAME_BAT + ".bat"));
             PrintWriter writeArq = new PrintWriter(arq);
             writeArq.printf(bot_txt.getText());
             arq.close();
@@ -308,7 +309,7 @@ public class Settings extends javax.swing.JDialog {
 
     private static String read_fwfile() {
         String forwading = null;
-        String filename = USERPROFILE_PATH + "/pandacontrol/bin/forwading.panda";
+        String filename = PANDAPATH + "/forwading.panda";
         try {
             FileReader arq = new FileReader(filename);
             BufferedReader readArq = new BufferedReader(arq);
@@ -323,7 +324,7 @@ public class Settings extends javax.swing.JDialog {
     private void save_fwfile() {
         FileWriter arq = null;
         try {
-            arq = new FileWriter(new File(USERPROFILE_PATH + "/pandacontrol/bin/forwading.panda"));
+            arq = new FileWriter(new File(PANDAPATH +"/forwading.panda"));
             PrintWriter writeArq = new PrintWriter(arq);
             writeArq.printf(fw_txt.getText());
             arq.close();

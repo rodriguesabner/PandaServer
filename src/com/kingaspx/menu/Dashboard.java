@@ -1,13 +1,22 @@
 package com.kingaspx.menu;
 
+import static com.kingaspx.util.ColorClass.BLACK;
+import static com.kingaspx.util.ColorClass.BLUE;
+import static com.kingaspx.util.ColorClass.DARK_GRAY;
+import static com.kingaspx.util.ColorClass.LIGHT_GRAY;
+import static com.kingaspx.util.ColorClass.MIDDLE_GRAY;
+import static com.kingaspx.util.ColorClass.PINK;
+import static com.kingaspx.util.ColorClass.WHITE;
 import com.kingaspx.util.NGrokDAO;
 import com.kingaspx.util.NGrokModel;
 import com.kingaspx.util.RoundFrame;
+import com.kingaspx.util.ThemeClass;
+import com.kingaspx.util.Toast;
 import static com.kingaspx.util.UtilClass.ARCH;
 import static com.kingaspx.util.UtilClass.OS;
+import static com.kingaspx.util.UtilClass.PANDAPATH;
 import static com.kingaspx.util.UtilClass.PROCESSORS;
 import static com.kingaspx.util.UtilClass.PROCESS_NAME;
-import static com.kingaspx.util.UtilClass.USERPROFILE_PATH;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GraphicsDevice;
@@ -15,6 +24,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,8 +37,10 @@ import javax.swing.JOptionPane;
 
 public class Dashboard extends javax.swing.JFrame {
 
-    int xMouse = 0, yMouse = 0;
     NGrokDAO dao = new NGrokDAO();
+    ThemeClass tClass = new ThemeClass();
+
+    int xMouse = 0, yMouse = 0;
 
     public Dashboard() {
         initComponents();
@@ -35,15 +48,16 @@ public class Dashboard extends javax.swing.JFrame {
         setIcon();
         new RoundFrame().corner(this, getWidth(), getHeight(), 10, 10);
 
-        pack();
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
-        Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
-        int x = (int) rect.getMaxX() - this.getWidth() - 10;
-        int y = (int) rect.getMaxY() - this.getHeight() - 50;
-        setLocation(x, y);
-
+//        pack();
+//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
+//        Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
+//        int x = (int) rect.getMaxX() - this.getWidth() - 10;
+//        int y = (int) rect.getMaxY() - this.getHeight() - 50;
+//        setLocation(x, y);
         refresh();
+
+        set_theme();
     }
 
     @SuppressWarnings("unchecked")
@@ -80,17 +94,19 @@ public class Dashboard extends javax.swing.JFrame {
         core_txt = new javax.swing.JLabel();
         settings_btn1 = new keeptoo.KButton();
         close_btn = new keeptoo.KButton();
+        change_theme_btn = new keeptoo.KButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         kGradientPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        kGradientPanel3.setkBorderRadius(5);
         kGradientPanel3.setkFillBackground(false);
         kGradientPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel5.setForeground(new java.awt.Color(78, 78, 78));
         jLabel5.setText("IP Address");
         kGradientPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 20));
 
@@ -98,12 +114,12 @@ public class Dashboard extends javax.swing.JFrame {
         kGradientPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 300, 10));
 
         jLabel3.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel3.setForeground(new java.awt.Color(78, 78, 78));
         jLabel3.setText("Protocol");
         kGradientPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 70, 20));
 
         jLabel9.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel9.setForeground(new java.awt.Color(78, 78, 78));
         jLabel9.setText("Forwading");
         kGradientPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 100, 20));
 
@@ -114,17 +130,17 @@ public class Dashboard extends javax.swing.JFrame {
         kGradientPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 300, 10));
 
         prot_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        prot_txt.setForeground(new java.awt.Color(23, 23, 23));
+        prot_txt.setForeground(new java.awt.Color(47, 47, 47));
         prot_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         kGradientPanel3.add(prot_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 140, 20));
 
         fw_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        fw_txt.setForeground(new java.awt.Color(23, 23, 23));
+        fw_txt.setForeground(new java.awt.Color(47, 47, 47));
         fw_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         kGradientPanel3.add(fw_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 140, 20));
 
         ip_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        ip_txt.setForeground(new java.awt.Color(23, 23, 23));
+        ip_txt.setForeground(new java.awt.Color(47, 47, 47));
         ip_txt.setContentAreaFilled(false);
         ip_txt.setFocusPainted(false);
         ip_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -153,12 +169,12 @@ public class Dashboard extends javax.swing.JFrame {
         server_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Montserrat Medium", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel2.setForeground(new java.awt.Color(47, 47, 47));
         jLabel2.setText("Panda");
         kGradientPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
 
         jLabel1.setFont(new java.awt.Font("Montserrat Light", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel1.setForeground(new java.awt.Color(47, 47, 47));
         jLabel1.setText("Control");
         kGradientPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 70, 30));
 
@@ -182,31 +198,30 @@ public class Dashboard extends javax.swing.JFrame {
 
         kGradientPanel3.add(panel_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 90, -1));
 
-        getContentPane().add(kGradientPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 320, 230));
+        getContentPane().add(kGradientPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 320, 230));
 
         kGradientPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        kGradientPanel1.setkEndColor(new java.awt.Color(108, 108, 108));
+        kGradientPanel1.setkBorderRadius(5);
         kGradientPanel1.setkFillBackground(false);
-        kGradientPanel1.setkStartColor(new java.awt.Color(81, 81, 81));
         kGradientPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Montserrat Light", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel7.setForeground(new java.awt.Color(47, 47, 47));
         jLabel7.setText("Specifications");
         kGradientPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 150, 30));
 
         jLabel8.setFont(new java.awt.Font("Montserrat Medium", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(12, 29, 46));
+        jLabel8.setForeground(new java.awt.Color(47, 47, 47));
         jLabel8.setText("OS");
         kGradientPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel4.setForeground(new java.awt.Color(78, 78, 78));
         jLabel4.setText("OS");
         kGradientPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 20));
 
         os_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        os_txt.setForeground(new java.awt.Color(23, 23, 23));
+        os_txt.setForeground(new java.awt.Color(47, 47, 47));
         os_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         kGradientPanel1.add(os_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 140, 20));
 
@@ -214,12 +229,12 @@ public class Dashboard extends javax.swing.JFrame {
         kGradientPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 300, 10));
 
         jLabel6.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel6.setForeground(new java.awt.Color(78, 78, 78));
         jLabel6.setText("Architeture");
         kGradientPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
 
         arch_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        arch_txt.setForeground(new java.awt.Color(23, 23, 23));
+        arch_txt.setForeground(new java.awt.Color(47, 47, 47));
         arch_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         kGradientPanel1.add(arch_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 140, 20));
 
@@ -227,7 +242,7 @@ public class Dashboard extends javax.swing.JFrame {
         kGradientPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 300, 10));
 
         jLabel11.setFont(new java.awt.Font("Montserrat Light", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(72, 72, 72));
+        jLabel11.setForeground(new java.awt.Color(78, 78, 78));
         jLabel11.setText("CPU");
         kGradientPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 20));
 
@@ -235,16 +250,16 @@ public class Dashboard extends javax.swing.JFrame {
         kGradientPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 300, 10));
 
         core_txt.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        core_txt.setForeground(new java.awt.Color(23, 23, 23));
+        core_txt.setForeground(new java.awt.Color(47, 47, 47));
         core_txt.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         kGradientPanel1.add(core_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 140, 20));
 
         settings_btn1.setToolTipText("Settings");
         settings_btn1.setkAllowGradient(false);
         settings_btn1.setkAllowTab(false);
-        settings_btn1.setkBackGroundColor(new java.awt.Color(47, 47, 47));
-        settings_btn1.setkHoverColor(new java.awt.Color(47, 47, 47));
-        settings_btn1.setkPressedColor(new java.awt.Color(47, 47, 47));
+        settings_btn1.setkBackGroundColor(new java.awt.Color(56, 140, 228));
+        settings_btn1.setkHoverColor(new java.awt.Color(56, 140, 228));
+        settings_btn1.setkPressedColor(new java.awt.Color(56, 140, 228));
         settings_btn1.setOpaque(false);
         settings_btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,9 +284,25 @@ public class Dashboard extends javax.swing.JFrame {
         kGradientPanel1.add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 10, 10));
         close_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 180));
+        change_theme_btn.setToolTipText("Change Theme");
+        change_theme_btn.setkAllowGradient(false);
+        change_theme_btn.setkAllowTab(false);
+        change_theme_btn.setkBackGroundColor(new java.awt.Color(47, 47, 47));
+        change_theme_btn.setkHoverColor(new java.awt.Color(47, 47, 47));
+        change_theme_btn.setkPressedColor(new java.awt.Color(47, 47, 47));
+        change_theme_btn.setOpaque(false);
+        change_theme_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_theme_btnActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(change_theme_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 40, 10));
+        settings_btn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        setBounds(0, 0, 339, 429);
+        getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 180));
+
+        setSize(new java.awt.Dimension(339, 439));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     boolean server_status = false;
@@ -279,11 +310,10 @@ public class Dashboard extends javax.swing.JFrame {
     private void server_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_server_btnActionPerformed
         try {
             if (server_status == false) {
-                if (OS.equals("x86")) {
-                    Runtime.getRuntime().exec("cmd /c start /B start_x86.bat");
+                if (ARCH.equals("x86")) {
+                    Runtime.getRuntime().exec("cmd /c start /B start_x86.bat"); //32 bits
                 } else {
-                    Process p = Runtime.getRuntime().exec("cmd /c start /B start_64.bat");
-                    System.out.println(p.getErrorStream().read());
+                    Runtime.getRuntime().exec("cmd /c start /B start_64.bat"); //64bits
                 }
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -304,7 +334,16 @@ public class Dashboard extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         }
+        copy_clipboard();
     }//GEN-LAST:event_ip_txtActionPerformed
+
+    private void copy_clipboard() {
+        String str = ip_txt.getText();
+        StringSelection strSelection = new StringSelection(str);
+        Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clip.setContents(strSelection, null);
+        new Toast("Copied to Clipboard");
+    }
 
     private void close_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_btnActionPerformed
         setVisible(false);
@@ -313,6 +352,18 @@ public class Dashboard extends javax.swing.JFrame {
     private void settings_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settings_btn1ActionPerformed
         new Settings(this, true).setVisible(true);
     }//GEN-LAST:event_settings_btn1ActionPerformed
+
+    boolean btn_theme_pressed = false;
+
+    private void change_theme_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_theme_btnActionPerformed
+        if (btn_theme_pressed == false) {
+            setLightTheme();
+            btn_theme_pressed = true;
+        } else {
+            setDarkTheme();
+            btn_theme_pressed = false;
+        }
+    }//GEN-LAST:event_change_theme_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -347,6 +398,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel arch_txt;
+    private keeptoo.KButton change_theme_btn;
     private keeptoo.KButton close_btn;
     private javax.swing.JLabel core_txt;
     private javax.swing.JLabel fw_txt;
@@ -449,7 +501,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private static String read_fwfile() {
         String forwading = null;
-        String filename = USERPROFILE_PATH + "/pandacontrol/bin/forwading.panda";
+        String filename = PANDAPATH + "/forwading.panda";
         try {
             FileReader arq = new FileReader(filename);
             BufferedReader readArq = new BufferedReader(arq);
@@ -463,6 +515,140 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/kingaspx/icons/logo.png")));
+    }
+
+    private void setDarkTheme() {
+        kGradientPanel1.setBackground(DARK_GRAY);
+        kGradientPanel1.setkStartColor(WHITE);
+        kGradientPanel1.setkEndColor(new Color(35, 224, 77));
+
+        kGradientPanel3.setBackground(DARK_GRAY);
+        kGradientPanel3.setkStartColor(WHITE);
+        kGradientPanel3.setkEndColor(new Color(35, 224, 77));
+
+        //1st column
+        jSeparator2.setForeground(DARK_GRAY);
+        jSeparator4.setForeground(DARK_GRAY);
+        jSeparator7.setForeground(DARK_GRAY);
+
+        jSeparator2.setBackground(MIDDLE_GRAY);
+        jSeparator4.setBackground(MIDDLE_GRAY);
+        jSeparator7.setBackground(MIDDLE_GRAY);
+
+        //Title
+        jLabel8.setForeground(WHITE);
+        jLabel7.setForeground(WHITE);
+
+        //Left Text
+        jLabel4.setForeground(WHITE);
+        jLabel6.setForeground(WHITE);
+        jLabel11.setForeground(WHITE);
+
+        //Right Text
+        os_txt.setForeground(WHITE);
+        arch_txt.setForeground(WHITE);
+        core_txt.setForeground(WHITE);
+
+        //2st column
+        jSeparator3.setForeground(DARK_GRAY);
+        jSeparator1.setForeground(DARK_GRAY);
+        jSeparator5.setForeground(DARK_GRAY);
+
+        jSeparator3.setBackground(MIDDLE_GRAY);
+        jSeparator1.setBackground(MIDDLE_GRAY);
+        jSeparator5.setBackground(MIDDLE_GRAY);
+
+        //Title
+        jLabel2.setForeground(WHITE);
+        jLabel1.setForeground(WHITE);
+
+        //Left Text
+        jLabel5.setForeground(WHITE);
+        jLabel3.setForeground(WHITE);
+        jLabel9.setForeground(WHITE);
+
+        //Right Text
+        ip_txt.setForeground(WHITE);
+        prot_txt.setForeground(WHITE);
+        fw_txt.setForeground(WHITE);
+
+        change_theme_btn.setkBackGroundColor(WHITE);
+        change_theme_btn.setkHoverColor(WHITE);
+        change_theme_btn.setkPressedColor(WHITE);
+
+        tClass.save_theme("Dark");
+    }
+
+    private void setLightTheme() {
+        kGradientPanel1.setBackground(WHITE);
+        kGradientPanel1.setkStartColor(PINK);
+        kGradientPanel1.setkEndColor(BLUE);
+
+        kGradientPanel3.setBackground(WHITE);
+        kGradientPanel3.setkStartColor(PINK);
+        kGradientPanel3.setkEndColor(BLUE);
+
+        //1st column
+        jSeparator2.setForeground(LIGHT_GRAY);
+        jSeparator4.setForeground(LIGHT_GRAY);
+        jSeparator7.setForeground(LIGHT_GRAY);
+
+        jSeparator2.setBackground(WHITE);
+        jSeparator4.setBackground(WHITE);
+        jSeparator7.setBackground(WHITE);
+
+        //Title
+        jLabel8.setForeground(BLACK);
+        jLabel7.setForeground(BLACK);
+
+        //Left Text
+        jLabel4.setForeground(DARK_GRAY);
+        jLabel6.setForeground(DARK_GRAY);
+        jLabel11.setForeground(DARK_GRAY);
+
+        //Right Text
+        os_txt.setForeground(BLACK);
+        arch_txt.setForeground(BLACK);
+        core_txt.setForeground(BLACK);
+
+        //2st column
+        jSeparator3.setForeground(LIGHT_GRAY);
+        jSeparator1.setForeground(LIGHT_GRAY);
+        jSeparator5.setForeground(LIGHT_GRAY);
+
+        jSeparator3.setBackground(WHITE);
+        jSeparator1.setBackground(WHITE);
+        jSeparator5.setBackground(WHITE);
+
+        //Title
+        jLabel2.setForeground(BLACK);
+        jLabel1.setForeground(BLACK);
+
+        //Left Text
+        jLabel5.setForeground(DARK_GRAY);
+        jLabel3.setForeground(DARK_GRAY);
+        jLabel9.setForeground(DARK_GRAY);
+
+        //Right Text
+        ip_txt.setForeground(BLACK);
+        prot_txt.setForeground(BLACK);
+        fw_txt.setForeground(BLACK);
+
+        change_theme_btn.setkBackGroundColor(BLACK);
+        change_theme_btn.setkHoverColor(BLACK);
+        change_theme_btn.setkPressedColor(BLACK);
+
+        tClass.save_theme("Light");
+    }
+
+    String theme = tClass.read_theme();
+
+    private void set_theme() {
+        if (theme.equals("Dark")) {
+            setDarkTheme();
+        } else {
+            setLightTheme();
+        }
     }
 
 }
