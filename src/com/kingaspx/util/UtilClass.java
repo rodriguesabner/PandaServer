@@ -39,9 +39,5 @@ public class UtilClass {
         }
         return PANDAPATH;
     }
-    
-    public static void main(String[] args) {
-        System.out.println(ARCH);
-    }
 
 }
