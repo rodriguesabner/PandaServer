@@ -19,6 +19,7 @@ You must declare an environment variable to use the software:
 Windows:
 
 ```
+Move 'pandacontrol' to your UserProfile and
 setx %USERPROFILE%\pandacontrol\bin
 ```
 
