@@ -1,4 +1,5 @@
 # Panda Control
+![logo](https://user-images.githubusercontent.com/40338524/64139953-24c50600-cdd9-11e9-92dd-4ae9b765a3ac.png)
 
 I had to use NGrok on some projects and found myself in the impasse of having to start it via CMD, so it came to my mind to create a control panel where I could handle the server simply, that's how PandaControl was born.
 
