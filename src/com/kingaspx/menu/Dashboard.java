@@ -48,15 +48,15 @@ public class Dashboard extends javax.swing.JFrame {
         setIcon();
         new RoundFrame().corner(this, getWidth(), getHeight(), 10, 10);
 
-//        pack();
-//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
-//        Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
-//        int x = (int) rect.getMaxX() - this.getWidth() - 10;
-//        int y = (int) rect.getMaxY() - this.getHeight() - 50;
-//        setLocation(x, y);
-        refresh();
+        pack();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
+        Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
+        int x = (int) rect.getMaxX() - this.getWidth() - 10;
+        int y = (int) rect.getMaxY() - this.getHeight() - 50;
+        setLocation(x, y);
 
+        refresh();
         set_theme();
     }
 
@@ -301,7 +301,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 180));
 
-        setSize(new java.awt.Dimension(339, 439));
+        setSize(new java.awt.Dimension(342, 439));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -313,7 +313,7 @@ public class Dashboard extends javax.swing.JFrame {
                 if (ARCH.equals("x86")) {
                     Runtime.getRuntime().exec("cmd /c start /B start_x86.bat"); //32 bits
                 } else {
-                    Runtime.getRuntime().exec("cmd /c start /B start_64.bat"); //64bits
+                    Runtime.getRuntime().exec("cmd /c start /B start_64.bat"); //64
                 }
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
